@@ -1,28 +1,41 @@
 package com.example.user_repositories.ui
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import coil.compose.AsyncImage
 import com.example.user_repositories.data.Repository
 
 @Composable
 fun Repository(repository: Repository, modifier: Modifier = Modifier) {
-    Row {
-        AsyncImage(model = repository.name, contentDescription = null)
-        Text(
-            text = repository.name,
-            modifier = modifier
-        )
-        Text(
-            text = repository.description,
-            modifier = modifier
-        )
+    Card(modifier = Modifier
+        .fillMaxWidth()
+        .height(125.dp)
+        .padding(vertical = 2.dp, horizontal = 5.dp), ) {
+        Column{
+            Text(
+                text = "Nome: ${repository.name}",
+                modifier = Modifier.padding(3.dp)
+            )
+            repository.description?.let {
+                Text(
+                    text = "Descrição: $it",
+                    modifier = modifier.padding(3.dp)
+                )
+            }
+            Text(
+                text = "Url: ${repository.url}",
+                modifier = modifier.padding(3.dp)
+            )
+        }
     }
 }
 
